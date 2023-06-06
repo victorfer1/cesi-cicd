@@ -1,5 +1,5 @@
 name: build-tests-actions
-run-name: ${{ github.actor }} next actions
+run-name: ${{ github.actor }} SSH Connect
 on: [push]
 
 jobs:
@@ -24,7 +24,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}
       - name: Execute commands on EC2 instance
         run: |
-          cd cesi_cicd
+          npm install pm2 -g
+          npm run build
+          pm2 start npm -- start
 
   # build:
   #   runs-on: ubuntu-latest
