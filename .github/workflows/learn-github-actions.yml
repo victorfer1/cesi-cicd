@@ -24,8 +24,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}
       - name: Execute commands on EC2 instance
         run: |
-          cd cours-cesi-cicd
-          npm run start
+          cd cesi_cicd
 
 
 
