@@ -13,15 +13,14 @@ jobs:
             node_modules
             /home/runner/.cache/cypress
           key: ${{ runner.os }}-node-${{ hashFiles('/package-lock.json') }}
-      - run: npm install
-      - run: npm run build
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: SSH into EC2 instance
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cd cesi-cicd && git pull && npm install && npm run build && pm2 restart all"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "ls"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cd cesi-cicd && git pull && npm install && npm run build && pm2 start npm -- start"
 
   # build:
   #   runs-on: ubuntu-latest
