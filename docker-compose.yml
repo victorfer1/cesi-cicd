@@ -1,8 +1,21 @@
 services:
   web:
-    build:
-      ports:
-        - "3000:3000"
-      volumes:
-        - .:/app
-      command: npm run dev
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    command: npm run dev
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      MSSQL_SA_PASSWORD: info
+      ACCEPT_EULA: "Y"
+    volumes:
+      - ./docker/db:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
