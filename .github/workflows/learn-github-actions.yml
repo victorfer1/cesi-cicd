@@ -67,7 +67,7 @@ jobs:
             /home/runner/.cache/cypress
           key: ${{ runner.os }}-node-${{ hashFiles('/package-lock.json') }}
       - name: Docker Login
-        run: docker login ghcr.io -u victorfer1 -p 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
+        run: docker login ghcr.io -u victorfer1 -p ${{ secrets.ACCESS_TOKEN }}
       - name: Docker Build
         run: docker build -t ghcr.io/victorfer1/cesi-cicd/web:latest .
       - name: Docker Push
